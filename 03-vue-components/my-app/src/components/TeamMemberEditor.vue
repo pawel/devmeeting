@@ -5,6 +5,7 @@
       v-model="newTeamMember"
       name="teamMember"
       type="text"
+      @keydown.enter="addNewTeamMember()"
       placeholder="New team member">
     <button @click="addNewTeamMember()">Add hardcoded name!</button>
     <div v-show="errors.has('teamMember')"> {{ errors.first('teamMember') }} </div>

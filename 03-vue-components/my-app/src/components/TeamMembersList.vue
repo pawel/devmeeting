@@ -1,19 +1,23 @@
 <template>
   <div>
     <ul>
-      <li
+      <TeamMemberListItem 
         v-for="member in team"
-        :key="member">{{ member }}
-        <button @click="removeTeamMember(member)">[x]</button>
-      </li>
+        :teamMember="member"
+        :key="member" />
     </ul>
     <p v-if="!team.length">No team members!</p>
   </div>
 </template>
 
 <script>
+import TeamMemberListItem from './TeamMemberListItem.vue';
+
 export default {
   name: 'TeamMembersList',
+  components: {
+    TeamMemberListItem,
+  },
   props: {
     team: {
       type: Array,
