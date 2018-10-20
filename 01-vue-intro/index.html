@@ -11,18 +11,22 @@
         <ul>
             <li v-for="member in team">{{ member }}</li>
         </ul>
-        <button v-on:click="addHardcodedName()">Add hardcoded name!</button>
+        <input type="text" v-model="newTeamMember" placeholder="New team member">
+        <button v-on:click="addNewTeamMember()">Add hardcoded name!</button>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/vue"></script>
      <script>
         const vue = new Vue({
             el: '#app',
             data: {
-                team: ['Aleksandra', 'Matusz', 'Maciej', 'Wojtek', 'Paweł']
+                team: ['Aleksandra', 'Matusz', 'Maciej', 'Wojtek', 'Paweł'],
+                newTeamMember: undefined
             },
             methods: {
-                addHardcodedName: function() {
-                    this.team.push('Tomek');
+                addNewTeamMember: function() {
+                    if(this.newTeamMember) {
+                        this.team.push(this.newTeamMember)
+                    }
                 }
             }
         })
