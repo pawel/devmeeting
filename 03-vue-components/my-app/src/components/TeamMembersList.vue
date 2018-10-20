@@ -6,7 +6,7 @@
         :teamMember="member"
         :key="member" />
     </ul>
-    <p v-if="!team.length">No team members!</p>
+    <p v-if="!(team && team.length)">No team members!</p>
   </div>
 </template>
 

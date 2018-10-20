@@ -1,15 +1,17 @@
 <template>
   <div class="hello">
-    <TeamMembersList :team="team" />
-    <TeamMemberEditor @add-team-member="onAddTeamMember" />
-    <TeamMembersListSorter :team="team" @sort-members-list="replaceTeamMembers" />
+    <TeamMembersList :team="state.team" />
+    <!--<TeamMemberEditor @add-team-member="onAddTeamMember" />
+    <TeamMembersListSorter :team="team" @sort-members-list="replaceTeamMembers" />-->
   </div>
 </template>
 
 <script>
+import axios from 'axios';
 import TeamMembersList from './TeamMembersList.vue';
 import TeamMemberEditor from './TeamMemberEditor.vue';
 import TeamMembersListSorter from './TeamMembersListSorter.vue';
+import store from '../store';
 
 export default {
   components: {
@@ -17,17 +19,21 @@ export default {
     TeamMemberEditor,
     TeamMembersListSorter
   },
+  created() {
+    store.fetchTeamMembers();
+    console.log('this.team' +  store.state.team);
+  },
   data() {
     return {
-      team: ['Aleksandra', 'Matusz', 'Maciej', 'Wojtek', 'Paweł'],
+      state: store.state
     };
   },
   methods: {
     onAddTeamMember(newTeamMember) {
-      this.team.push(newTeamMember);
+      this.store.addTeamMember(newTeamMember);
     },
     replaceTeamMembers(sortedTeamMembers) {
-      this.team = sortedTeamMembers;
+      this.store.replaceTeamMembers(sortedTeamMembers);
     }
   },
 };

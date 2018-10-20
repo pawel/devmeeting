@@ -4,7 +4,7 @@
       <button @click="changeSortOrder()">{{sortOrder}}</button>
       <button @click="sort()">Sort ({{sortOrder}})</button>
     </ul>
-    <p v-if="!team.length">No team members!</p>
+    <p v-if="!(team && team.length)">No team members!</p>
   </div>
 </template>
 
