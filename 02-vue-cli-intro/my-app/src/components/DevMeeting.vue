@@ -8,10 +8,13 @@
       </li>
     </ul>
     <input
+      v-validate="'required|min:3'"
       v-model="newTeamMember"
+      name="teamMember"
       type="text"
       placeholder="New team member">
     <button @click="addNewTeamMember()">Add hardcoded name!</button>
+    <div v-show="errors.has('teamMember')"> {{ errors.first('teamMember') }} </div>
   </div>
 </template>
 
@@ -25,9 +28,13 @@ export default {
   },
   methods: {
     addNewTeamMember() {
-      if (this.newTeamMember) {
+      this.$validator.validateAll().then((result) => {
+        if (!result) {
+          return;
+        }
         this.team.push(this.newTeamMember);
-      }
+        this.$validator.reset();
+      });
     },
     removeTeamMember(memberToRemove) {
       this.team.splice(this.team.indexOf(memberToRemove), 1);
