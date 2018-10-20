@@ -9,7 +9,9 @@
 <body>
     <div id="app">
         <ul>
-            <li v-for="member in team">{{ member }}</li>
+            <li v-for="member in team">{{ member }}
+                <button v-on:click="removeTeamMember(member)">[x]</button>
+            </li>
         </ul>
         <input type="text" v-model="newTeamMember" placeholder="New team member">
         <button v-on:click="addNewTeamMember()">Add hardcoded name!</button>
@@ -23,10 +25,13 @@
                 newTeamMember: undefined
             },
             methods: {
-                addNewTeamMember: function() {
+                addNewTeamMember() {
                     if(this.newTeamMember) {
                         this.team.push(this.newTeamMember)
                     }
+                },
+                removeTeamMember(memberToRemove) {
+                    this.team.splice( this.team.indexOf(memberToRemove), 1 )
                 }
             }
         })
