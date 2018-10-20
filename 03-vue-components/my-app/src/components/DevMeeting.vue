@@ -2,17 +2,20 @@
   <div class="hello">
     <TeamMembersList :team="team" />
     <TeamMemberEditor @add-team-member="onAddTeamMember" />
+    <TeamMembersListSorter :team="team" @sort-members-list="replaceTeamMembers" />
   </div>
 </template>
 
 <script>
 import TeamMembersList from './TeamMembersList.vue';
 import TeamMemberEditor from './TeamMemberEditor.vue';
+import TeamMembersListSorter from './TeamMembersListSorter.vue';
 
 export default {
   components: {
     TeamMembersList,
     TeamMemberEditor,
+    TeamMembersListSorter
   },
   data() {
     return {
@@ -23,6 +26,9 @@ export default {
     onAddTeamMember(newTeamMember) {
       this.team.push(newTeamMember);
     },
+    replaceTeamMembers(sortedTeamMembers) {
+      this.team = sortedTeamMembers;
+    }
   },
 };
 </script>

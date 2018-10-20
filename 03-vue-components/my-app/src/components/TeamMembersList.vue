@@ -22,7 +22,7 @@ export default {
     team: {
       type: Array,
     }
-  }
+  },
 };
 </script>
 
